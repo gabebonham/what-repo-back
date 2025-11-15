@@ -5,7 +5,7 @@ import { DrizzleAsyncProvider } from 'src/drizzle/drizzle.provider';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 import * as schema from 'src/drizzle/schema';
 import { groups } from 'src/db/schemas/group.entity';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 @Injectable()
 export class GroupService {
   constructor(
@@ -66,10 +66,30 @@ export class GroupService {
     return Group.fromDb(newGroup);
   }
   async joinGroup(id: string, profileId: string): Promise<void> {
-    await this.db
-      .insert(schema.profileGroups)
-      .values({ profileId: profileId, groupId: id })
-      .returning();
+    const result = await this.db
+      .select()
+      .from(schema.profileGroups)
+      .where(
+        eq(schema.profileGroups.groupId, id) &&
+          eq(schema.profileGroups.profileId, profileId),
+      );
+    const exists = result.length > 0;
+
+    if (exists) {
+      await this.db
+        .delete(schema.profileGroups)
+        .where(
+          and(
+            eq(schema.profileGroups.groupId, id),
+            eq(schema.profileGroups.profileId, profileId),
+          ),
+        );
+    } else {
+      await this.db
+        .insert(schema.profileGroups)
+        .values({ profileId: profileId, groupId: id })
+        .returning();
+    }
   }
   async deleteGroup(id: string): Promise<Group> {
     const [newGroup] = await this.db
