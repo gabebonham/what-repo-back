@@ -3,6 +3,7 @@ import { User } from 'src/auth/entities/user.model';
 import { Category } from 'src/category/models/category.model';
 import { NewCategoryDb } from 'src/db/schemas/category.entity';
 import { NewGroupDb } from 'src/drizzle/schema';
+import { Profile } from 'src/profile/models/profile.model';
 
 export class Group {
   id: UUID;
@@ -14,7 +15,7 @@ export class Group {
   link?: string;
   description: string;
   verified: boolean;
-  author?: User | null;
+  author?: Profile | null;
   authorId?: UUID | null;
   rules?: string[];
   banned: boolean;
@@ -33,6 +34,7 @@ export class Group {
     whatsLink: string,
     createdAt: Date,
     category?: Category,
+    user?: Profile,
   ) {
     this.id = id;
     this.name = name;
@@ -46,24 +48,23 @@ export class Group {
     this.banned = banned;
     this.whatsLink = whatsLink;
     this.createdAt = createdAt;
+    this.author = user;
   }
-  static fromDb(row: any): Group {
+  static fromDb(row: any, cat?: any, pr?: any): Group {
     return new Group(
       row.id,
       row.name,
-      row.category_id ?? row.categoryId,
-      row.user_count ?? row.userCount,
-      row.image_url ?? row.imageUrl,
+      row.categoryId,
+      row.userCount,
+      row.imageUrl,
       row.link,
       row.description,
-      (row.rules || '')
-        .split(',')
-        .map((r: string) => r.trim())
-        .filter(Boolean),
+      (row.rules || '').split(','),
       row.banned,
-      row.whats_link ?? row.whatsLink,
-      row.created_at ?? row.createdAt,
-      row.categories,
+      row.whatsLink,
+      row.createdAt,
+      cat ? Category.fromDb(cat) : undefined,
+      pr,
     );
   }
 }

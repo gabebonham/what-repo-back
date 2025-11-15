@@ -5,9 +5,10 @@ import { GroupService } from './service/group.service';
 import { InjectablesModule } from 'src/shared/injectables.module';
 import { AuthModule } from 'src/auth/auth.module';
 import { drizzleProvider } from 'src/drizzle/drizzle.provider';
+import { ProfileModule } from 'src/profile/profile.module';
 
 @Module({
-  imports: [InjectablesModule, AuthModule],
+  imports: [InjectablesModule, AuthModule, ProfileModule],
   controllers: [GroupController],
   providers: [GroupService, ...drizzleProvider],
   exports: [GroupService],

@@ -19,12 +19,10 @@ import type {
 @Controller('api/categories')
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
-  @UseGuards(AuthGuard)
   @Get(':id')
   async getCategoryById(@Param('id') id: string): Promise<Category> {
     return await this.categoryService.getCategoryById(id);
   }
-  @UseGuards(AuthGuard)
   @Get()
   async getCategorys(): Promise<Category[]> {
     return await this.categoryService.getCategorys();

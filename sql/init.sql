@@ -50,8 +50,14 @@ CREATE TABLE groups (
     banned BOOLEAN NOT NULL DEFAULT FALSE,
     whats_link TEXT,
 
-    author_id UUID REFERENCES users(id) ON DELETE SET NULL,
+    author_id UUID REFERENCES profiles(id) ON DELETE SET NULL,
     created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS profile_groups (
+    profile_id UUID NOT NULL REFERENCES profiles(id) ON DELETE CASCADE,
+    group_id UUID NOT NULL REFERENCES groups(id) ON DELETE CASCADE,
+    PRIMARY KEY (profile_id, group_id)
 );
 
 CREATE INDEX idx_users_email ON users(email);

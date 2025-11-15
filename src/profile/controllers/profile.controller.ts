@@ -19,12 +19,14 @@ import type {
 @Controller('api/profiles')
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
-  @UseGuards(AuthGuard)
   @Get(':id')
   async getProfileById(@Param('id') id: string): Promise<Profile> {
     return await this.profileService.getProfileById(id);
   }
-  @UseGuards(AuthGuard)
+  @Get('user/:id')
+  async getProfileByUserId(@Param('id') id: string): Promise<Profile> {
+    return await this.profileService.getProfileByUserId(id);
+  }
   @Get()
   async getProfiles(): Promise<Profile[]> {
     return await this.profileService.getProfiles();

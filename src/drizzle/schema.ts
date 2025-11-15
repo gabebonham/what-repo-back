@@ -3,6 +3,7 @@ import { InferInsertModel, InferSelectModel, sql } from 'drizzle-orm';
 import { primaryKey } from 'drizzle-orm/pg-core';
 import { integer } from 'drizzle-orm/pg-core';
 import { boolean } from 'drizzle-orm/pg-core';
+import { relations } from 'drizzle-orm';
 
 // users table
 export const users = pgTable('users', {
@@ -21,7 +22,7 @@ export const profiles = pgTable('profiles', {
   id: uuid('id').primaryKey().defaultRandom(),
 
   name: varchar('name', { length: 100 }),
-  authorId: uuid('user_id').references(() => users.id, {
+  userId: uuid('user_id').references(() => users.id, {
     onDelete: 'cascade',
   }),
   imageUrl: text('image_url'),
@@ -70,7 +71,7 @@ export const groups = pgTable('groups', {
   banned: boolean('banned').default(false).notNull(),
   whatsLink: text('whats_link'),
 
-  authorId: uuid('author_id').references(() => users.id, {
+  authorId: uuid('author_id').references(() => profiles.id, {
     onDelete: 'set null',
   }),
 
@@ -97,3 +98,21 @@ export const categories = pgTable('categories', {
 });
 export type CategoryDb = InferSelectModel<typeof categories>;
 export type NewCategoryDb = InferInsertModel<typeof categories>;
+
+export const profileRelations = relations(profiles, ({ many }) => ({
+  profileGroups: many(profileGroups),
+}));
+
+export const groupsRelations = relations(groups, ({ many }) => ({
+  profileGroups: many(profileGroups),
+}));
+export const profileToGroupsRelations = relations(profileGroups, ({ one }) => ({
+  profile: one(profiles, {
+    fields: [profileGroups.profileId],
+    references: [profiles.id],
+  }),
+  group: one(groups, {
+    fields: [profileGroups.groupId],
+    references: [groups.id],
+  }),
+}));

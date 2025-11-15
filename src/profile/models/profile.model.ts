@@ -1,3 +1,4 @@
+import { log } from 'console';
 import { UUID } from 'crypto';
 import { User } from 'src/auth/entities/user.model';
 import { Category } from 'src/category/models/category.model';
@@ -35,16 +36,23 @@ export class Profile {
     this.createdAt = createdAt;
   }
   static fromDb(row: any): Profile {
+    let groups = [];
+    const profile = row;
+    if (row.profileGroups) {
+      groups = row.profileGroups
+        .map((gr) => gr.group)
+        .map((gr) => Group.fromDb(gr));
+    }
     return new Profile(
-      row.id,
-      row.name,
-      row.email,
-      row.groups,
-      row.users,
-      row.created_at ?? row.createdAt,
-      row.image_url ?? row.imageUrl,
-      row.phone,
-      row.userId,
+      profile.id,
+      profile.name,
+      profile.email,
+      groups,
+      profile.users,
+      profile.created_at ?? row.createdAt,
+      profile.image_url ?? row.imageUrl,
+      profile.phone,
+      profile.userId,
     );
   }
 }
