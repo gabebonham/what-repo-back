@@ -1,10 +1,10 @@
 import { randomUUID, UUID } from 'crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { Group, GroupPatchReq, GroupReq } from '../models/group.model';
-import { DrizzleAsyncProvider } from 'src/drizzle/drizzle.provider';
+import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import * as schema from 'src/drizzle/schema';
-import { groups } from 'src/db/schemas/group.entity';
+import * as schema from '../../drizzle/schema';
+import { groups } from '../../db/schemas/group.entity';
 import { and, eq } from 'drizzle-orm';
 @Injectable()
 export class GroupService {

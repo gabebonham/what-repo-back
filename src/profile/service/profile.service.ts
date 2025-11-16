@@ -1,12 +1,11 @@
 import { randomUUID, UUID } from 'crypto';
 import { Inject, Injectable } from '@nestjs/common';
 import { Profile, ProfilePatchReq, ProfileReq } from '../models/profile.model';
-import { DrizzleAsyncProvider } from 'src/drizzle/drizzle.provider';
+import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import * as schema from 'src/drizzle/schema';
-import { profileGroups, profiles } from 'src/db/schemas/profile.entity';
+import * as schema from '../../drizzle/schema';
+import { profileGroups, profiles } from '../../db/schemas/profile.entity';
 import { eq } from 'drizzle-orm';
-import { groups } from 'src/db/schemas/group.entity';
 
 @Injectable()
 export class ProfileService {

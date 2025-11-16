@@ -12,11 +12,10 @@ import {
   TokenExpiredError,
   verify,
 } from 'jsonwebtoken';
-import * as schema from 'src/drizzle/schema';
-import { User } from 'src/auth/entities/user.model';
-import { UserService } from 'src/auth/services/user.service';
-import { DrizzleAsyncProvider } from 'src/drizzle/drizzle.provider';
-import { users } from 'src/drizzle/schema';
+import * as schema from '../../drizzle/schema';
+import { User } from '../../auth/entities/user.model';
+import { UserService } from '../../auth/services/user.service';
+import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 
 @Injectable()
 export class AuthService {

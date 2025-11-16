@@ -5,10 +5,10 @@ import {
   CategoryPatchReq,
   CategoryReq,
 } from '../models/category.model';
-import { DrizzleAsyncProvider } from 'src/drizzle/drizzle.provider';
+import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
-import * as schema from 'src/drizzle/schema';
-import { categories } from 'src/db/schemas/category.entity';
+import * as schema from '../../drizzle/schema';
+import { categories } from '../../db/schemas/category.entity';
 import { eq } from 'drizzle-orm';
 @Injectable()
 export class CategoryService {

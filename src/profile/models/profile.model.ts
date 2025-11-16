@@ -1,9 +1,9 @@
 import { log } from 'console';
 import { UUID } from 'crypto';
-import { User } from 'src/auth/entities/user.model';
-import { Category } from 'src/category/models/category.model';
-import { NewProfileDb } from 'src/db/schemas/profile.entity';
-import { Group } from 'src/group/models/group.model';
+import { User } from '../../auth/entities/user.model';
+import { Category } from '../../category/models/category.model';
+import { NewProfileDb } from '../../db/schemas/profile.entity';
+import { Group } from '../../group/models/group.model';
 export class Profile {
   id: UUID;
   name: string;

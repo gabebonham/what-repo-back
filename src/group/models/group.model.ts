@@ -1,9 +1,9 @@
 import { UUID } from 'crypto';
-import { User } from 'src/auth/entities/user.model';
-import { Category } from 'src/category/models/category.model';
-import { NewCategoryDb } from 'src/db/schemas/category.entity';
-import { NewGroupDb } from 'src/drizzle/schema';
-import { Profile } from 'src/profile/models/profile.model';
+import { User } from '../../auth/entities/user.model';
+import { Category } from '../../category/models/category.model';
+import { NewCategoryDb } from '../../db/schemas/category.entity';
+import { NewGroupDb } from '../../drizzle/schema';
+import { Profile } from '../../profile/models/profile.model';
 
 export class Group {
   id: UUID;

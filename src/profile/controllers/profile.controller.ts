@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { ProfileService } from '../service/profile.service';
-import { AuthGuard } from 'src/shared/injectables/guards/auth-guard';
+import { AuthGuard } from '../../shared/injectables/guards/auth-guard';
 import type {
   Profile,
   ProfilePatchReq,

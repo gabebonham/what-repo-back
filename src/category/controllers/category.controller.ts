@@ -9,7 +9,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CategoryService } from '../service/category.service';
-import { AuthGuard } from 'src/shared/injectables/guards/auth-guard';
+import { AuthGuard } from '../../shared/injectables/guards/auth-guard';
 import type {
   Category,
   CategoryPatchReq,

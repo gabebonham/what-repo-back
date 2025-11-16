@@ -10,10 +10,10 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { GroupService } from '../service/group.service';
-import { AuthGuard } from 'src/shared/injectables/guards/auth-guard';
+import { AuthGuard } from '../../shared/injectables/guards/auth-guard';
 import type { Group, GroupPatchReq, GroupReq } from '../models/group.model';
-import { AuthService } from 'src/auth/services/auth.service';
-import { ProfileService } from 'src/profile/service/profile.service';
+import { AuthService } from '../../auth/services/auth.service';
+import { ProfileService } from '../../profile/service/profile.service';
 
 @Controller('api/groups')
 export class GroupController {

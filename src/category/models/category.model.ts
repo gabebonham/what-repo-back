@@ -1,7 +1,7 @@
 import { UUID } from 'crypto';
-import { User } from 'src/auth/entities/user.model';
-import { NewCategoryDb } from 'src/db/schemas/category.entity';
-import { NewGroupDb } from 'src/drizzle/schema';
+import { User } from '../../auth/entities/user.model';
+import { NewCategoryDb } from '../../db/schemas/category.entity';
+import { NewGroupDb } from '../../drizzle/schema';
 
 export class Category {
   id: UUID;

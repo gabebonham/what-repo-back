@@ -2,9 +2,9 @@ import { hash, randomUUID, UUID } from 'crypto';
 import { Role, User, UserPatchReq } from '../entities/user.model';
 import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { log } from 'console';
-import { users } from 'src/db/schemas/user.entity';
+import { users } from '../../db/schemas/user.entity';
 import { eq } from 'drizzle-orm';
-import { DrizzleAsyncProvider } from 'src/drizzle/drizzle.provider';
+import { DrizzleAsyncProvider } from '../../drizzle/drizzle.provider';
 import { PostgresJsDatabase } from 'drizzle-orm/postgres-js';
 @Injectable()
 export class UserService {

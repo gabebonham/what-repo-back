@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { AuthGuard } from './injectables/guards/auth-guard';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   controllers: [],
