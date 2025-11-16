@@ -40,8 +40,8 @@ export class Profile {
     const profile = row;
     if (row.profileGroups) {
       groups = row.profileGroups
-        .map((gr) => gr.group)
-        .map((gr) => Group.fromDb(gr));
+        .map((gr: any) => gr.group)
+        .map((gr: any) => Group.fromDb(gr));
     }
     return new Profile(
       profile.id,
