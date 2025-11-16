@@ -25,5 +25,5 @@
       "/*": ["/*"]
     }
   },
-  "include": ["sql/**.sql", "src/**.ts"]
+  "include": ["sql/**.sql", "./**.*"]
 }
